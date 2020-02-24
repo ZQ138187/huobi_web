@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="contract-java-demo:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/contract_java_demo_war</output-path>
+    <root id="archive" name="contract-java-demo_war.war">
+      <element id="artifact" artifact-name="contract-java-demo:war exploded" />
+    </root>
+  </artifact>
+</component>

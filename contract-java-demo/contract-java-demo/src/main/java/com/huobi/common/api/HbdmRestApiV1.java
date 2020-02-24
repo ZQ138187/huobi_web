@@ -50,10 +50,15 @@ public class HbdmRestApiV1 implements IHbdmRestApi {
 	public static final String HUOBI_FUTURE_CONTRACT_ORDER_DETAIL = "/api/v1/contract_order_detail";
 
 	public static final String HUOBI_FUTURE_CONTRACT_HISORDERS = "/api/v1/contract_hisorders";
+	public static final String HUOBI_HISTORY_ORDERS = "/v1/order/matchresults";
+
 
 	// 批量下单contract_batchorder
 	public static final String HUOBI_FUTURE_CONTRACT_BATCHORDER = "/api/v1/contract_batchorder";
 	// account相关
+	public static final String HUOBI_ACCOUNT_INFO = "/v1/account/accounts";
+	public static final String HUOBI_ACCOUNT_BALANCE = "/v1/account/accounts/%account_id%/balance";
+
 	public static final String HUOBI_FUTURE_ACCOUNT_INFO = "/api/v1/contract_account_info";
 	public static final String HUOBI_FUTURE_POSITION_INFO = "/api/v1/contract_position_info";
 	public static final String HUOBI_FUTURE_ORDER = "/api/v1/contract_order";
@@ -194,6 +199,55 @@ public class HbdmRestApiV1 implements IHbdmRestApi {
 
 		String res = HbdmHttpClient.getInstance().call(api_key, secret_key, "POST",
 				url_prex + HUOBI_FUTURE_ACCOUNT_INFO, params, new HashMap<>());
+		return res;
+	}
+	//@author zq
+	public String futureAccountInfo() throws HttpException, IOException {
+		String res = HbdmHttpClient.getInstance().call(api_key, secret_key, "GET",
+				url_prex + HUOBI_ACCOUNT_INFO, null,new HashMap<>());
+		return res;
+	}
+
+	/**
+	 * @author zq 查询历史订单
+	 * @return
+	 * @throws HttpException
+	 * @throws IOException
+	 */
+	public String futureHistoryOrders(String symbol,String types,String start_date,String end_date,
+									  String from,String direct,String size) throws HttpException, IOException {
+		Map<String, String> params = new HashMap<>();
+		if (!StringUtils.isEmpty(symbol)) {
+			params.put("symbol", symbol);
+		}
+		if (!StringUtils.isEmpty(types)) {
+			params.put("types", types);
+		}
+		if (!StringUtils.isEmpty(start_date)) {
+			params.put("start-date", start_date);
+		}
+		if (!StringUtils.isEmpty(end_date)) {
+			params.put("end-date", end_date);
+		}
+		if (!StringUtils.isEmpty(from)) {
+			params.put("from", from);
+
+		}
+		if (!StringUtils.isEmpty(direct)) {
+			params.put("direct", direct);
+		}
+		if (!StringUtils.isEmpty(size)) {
+			params.put("size", size);
+		}
+		String res = HbdmHttpClient.getInstance().call(api_key, secret_key, "GET",
+				url_prex + HUOBI_HISTORY_ORDERS, null,params);
+		return res;
+	}
+	//@author zq
+	public String futureAccountBalance(String accountId) throws HttpException, IOException {
+		String uri= HUOBI_ACCOUNT_BALANCE.replace("%account_id%",accountId);
+		String res = HbdmHttpClient.getInstance().call(api_key, secret_key, "GET",
+				url_prex + uri, null,new HashMap<>());
 		return res;
 	}
 

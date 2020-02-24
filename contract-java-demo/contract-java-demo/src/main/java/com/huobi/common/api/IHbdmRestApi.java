@@ -139,6 +139,23 @@ public interface IHbdmRestApi {
 	public String futureContractAccountInfo(String symbol) throws HttpException, IOException;
 
 	/**
+	 * @author zq
+	 * @return
+	 * @throws HttpException
+	 * @throws IOException
+	 */
+	public String futureAccountInfo() throws HttpException, IOException;
+
+	/**
+	 * 获取账户余额
+	 * @return
+	 * @throws HttpException
+	 * @throws IOException
+	 */
+	public String futureAccountBalance(String accountId) throws HttpException, IOException;
+	public String futureHistoryOrders(String symbol,String types,String start_date,String end_date,
+									   String from,String direct,String size) throws HttpException, IOException;
+	/**
 	 * 获取用户持仓信息
 	 * 
 	 * @param symbol

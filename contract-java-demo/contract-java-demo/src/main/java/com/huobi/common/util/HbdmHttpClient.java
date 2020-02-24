@@ -32,8 +32,8 @@ public class HbdmHttpClient {
 
 	private HbdmHttpClient() {
 		OkHttpClient.Builder builder = new OkHttpClient.Builder()
-				.connectionPool(new ConnectionPool(200, 10, TimeUnit.SECONDS)).connectTimeout(3, TimeUnit.SECONDS)
-				.readTimeout(5, TimeUnit.SECONDS);
+				.connectionPool(new ConnectionPool(200, 10, TimeUnit.SECONDS)).connectTimeout(30, TimeUnit.SECONDS)
+				.readTimeout(500, TimeUnit.SECONDS);
 		httpClient = builder.build();
 	}
 
